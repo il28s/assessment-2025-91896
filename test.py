@@ -1,3 +1,5 @@
+import easygui
+
 cards = {"STO":
             {"Name": "Stoneling", 
             "Strength": 7, 
@@ -59,9 +61,8 @@ cards = {"STO":
             "Stealth": 3, 
             "Cunning": 2}}
 
-for cards_id, cards_info in cards.items():
-    print("\nCard ID: ", cards_id)
+easygui.msgbox("Hello! Before we start please enter tell us your name.")
 
-    for key in cards_info:
-        print(key + ":", cards_info[key])
+user_name = easygui.enterbox("Whats is your name?", "Name")
 
+easygui.buttonbox("Nice to meet you, " + user_name + ", wanna makw a new card?", "Nice to meet you", choices = ["Yes", "No"])
