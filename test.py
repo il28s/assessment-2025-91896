@@ -61,8 +61,19 @@ cards = {"STO":
             "Stealth": 3, 
             "Cunning": 2}}
 
+message = ""
+
+for cards_id, cards_info in cards.items():
+    message += f"Card ID: {cards_id}\n"
+    for key, value in cards_info.items():
+        message += f" {key}: {value}\n"
+    
+easygui.msgbox(message)
+
+
 easygui.msgbox("Hello! Before we start please enter tell us your name.")
 
 user_name = easygui.enterbox("Whats is your name?", "Name")
 
 easygui.buttonbox("Nice to meet you, " + user_name + ", wanna makw a new card?", "Nice to meet you", choices = ["Yes", "No"])
+
