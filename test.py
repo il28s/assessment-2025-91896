@@ -1,3 +1,5 @@
+import easygui
+
 cards = {"STO":
             {"Name": "Stoneling", 
             "Strength": 7, 
@@ -59,10 +61,4 @@ cards = {"STO":
             "Stealth": 3, 
             "Cunning": 2}}
 
-for cards_id, cards_info in cards.items():
-    print(cards_info)
-
-new_card = input('ID: ').strip().title()
-while name:
-    try:
-        new_card = input('Name: ').strip().title()
+easygui.msgbox(cards)
