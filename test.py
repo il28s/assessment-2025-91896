@@ -1,5 +1,3 @@
-import easygui
-
 cards = {"STO":
             {"Name": "Stoneling", 
             "Strength": 7, 
@@ -61,4 +59,9 @@ cards = {"STO":
             "Stealth": 3, 
             "Cunning": 2}}
 
-easygui.msgbox(cards)
+for cards_id, cards_info in cards.items():
+    print("\nCard ID: ", cards_id)
+
+    for key in cards_info:
+        print(key + ":", cards_info[key])
+
