@@ -75,19 +75,17 @@ easygui.msgbox(message, "All cards")
 add_cards = easygui.buttonbox("Wanna add new cards?", "Add new cards?", choices = ["Yes", "No"])
 if add_cards == "Yes":
     while add_cards:
-            new_card = {}
             ID = easygui.enterbox("Please write ID of your card")
             if ID in cards:
                 easygui.msgbox('This ID alredy in the cards! Try another one')
             elif ID not in cards:
-                new_card[ID] = {}
+                cards[ID] = {}
             
             name = easygui.enterbox("Please write NAME of your card")
             if name in cards:
                 easygui.msgbox('This ID alredy in the cards! Try another one')
             elif name not in cards:
-                new_card[ID]['name'] = name
+                cards[ID]['name'] = name
                 break
         
 print(cards)
-print(new_card)
