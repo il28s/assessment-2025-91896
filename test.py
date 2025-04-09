@@ -76,9 +76,16 @@ add_cards = easygui.buttonbox("Wanna add new cards?", "Add new cards?", choices 
 if add_cards == "Yes":
     while add_cards:
             ID = easygui.enterbox("Please write ID of your card")
+            if len(ID) < 3:
+                 easygui.msgbox("Too long! ID must consist of three letters (it is recommended to use the first three letters of the monster's name).")
+                 continue
+            if len(ID) > 3:
+                 easygui.msgbox("Too short! ID must consist of three letters (it is recommended to use the first three letters of the monster's name).")
+                 continue    
             if ID in cards:
                 easygui.msgbox('This ID alredy in the cards! Try another one')
-            elif ID not in cards:
+                ID = easygui.enterbox("Please write ID of your card")
+            else:
                 cards[ID] = {}
             
             name = easygui.enterbox("Please write NAME of your card")
