@@ -73,26 +73,32 @@ for cards_id, cards_info in cards.items(): #go through all cards id and cards in
 easygui.msgbox(message, "All cards")
 
 add_cards = easygui.buttonbox("Wanna add new cards?", "Add new cards?", choices = ["Yes", "No"])
+
 if add_cards == "Yes":
-    while add_cards:
-            ID = easygui.enterbox("Please write ID of your card")
+    ID = easygui.enterbox("Please write ID of your card")
+    while ID:
             if len(ID) < 3:
-                 easygui.msgbox("Too long! ID must consist of three letters (it is recommended to use the first three letters of the monster's name).")
-                 continue
-            if len(ID) > 3:
                  easygui.msgbox("Too short! ID must consist of three letters (it is recommended to use the first three letters of the monster's name).")
-                 continue    
-            if ID in cards:
+                 ID = easygui.enterbox("Please write ID of your card")
+            elif len(ID) > 3:
+                 easygui.msgbox("Too long! ID must consist of three letters (it is recommended to use the first three letters of the monster's name).")
+                 ID = easygui.enterbox("Please write ID of your card")    
+            elif ID in cards:
                 easygui.msgbox('This ID alredy in the cards! Try another one')
                 ID = easygui.enterbox("Please write ID of your card")
             else:
                 cards[ID] = {}
-            
-            name = easygui.enterbox("Please write NAME of your card")
-            if name in cards:
-                easygui.msgbox('This ID alredy in the cards! Try another one')
-            elif name not in cards:
-                cards[ID]['name'] = name
                 break
-        
+name = easygui.enterbox("Please write NAME of your card")            
+while name:
+            if name in cards:
+                 easygui.msgbox('This ID alredy in the cards! Try another one')
+                 name = easygui.enterbox("Please write NAME of your card")
+            if len(name) > 25:
+                 easygui.msgbox('Maximum characters in name is 25')
+                 name = easygui.enterbox("Please write NAME of your card")
+
+            else:
+                 cards[ID]['Name'] = name
+            break
 print(cards)
