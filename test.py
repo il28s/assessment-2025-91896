@@ -71,3 +71,16 @@ for cards_id, cards_info in cards.items(): #go through all cards id and cards in
     for key, value in cards_info.items(): #go through all cards details in the cards_info 
         message += f" {key}: {value}\n" #add cards details (like speed, stealth)
 easygui.msgbox(message, "All cards")
+
+add_cards = easygui.buttonbox("Wanna add new cards?", "Add new cards?", choices = ["Yes", "No"])
+if add_cards == "Yes":
+    while add_cards:
+        try:
+            ID = easygui.enterbox("Please write ID of your card")
+            if ID in cards:
+                easygui.msgbox('This ID alredy in the cards! Try another one')
+
+            
+        except ValueError:
+            easygui.msgbox('Please enter a valid stuff.')
+            continue
