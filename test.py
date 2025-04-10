@@ -79,15 +79,22 @@ while True: #all almost all of the code is on the loop so it can be returned to 
         deleting = easygui.enterbox("Please write the ID of the card you want to delete.")
         del cards[deleting]
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+    elif menu == "Search":
+        message = ""
+        searching = easygui.enterbox("Enter name for searching.")
+        for key in cards.values():
+            message += f" {key}\n"
+            easygui.msgbox(message) 
+
+
+
+
+
+
+
+
+
     elif menu == "Change":
         while menu:
             change_characteristic_id = easygui.enterbox("Please write ID of card you want to change.")
@@ -97,7 +104,7 @@ while True: #all almost all of the code is on the loop so it can be returned to 
                 break
 
 
-        change_int_or_str = easygui.buttonbox("You want to change the name or stats?", "???", choices= ["ID", "Name", "stats"])
+        change_int_or_str = easygui.buttonbox("You want to change the name or stats?", "???", choices= ["Name", "stats"])
 
         if change_int_or_str == "Name":
             new_name = easygui.enterbox("Enter new name.")
@@ -119,10 +126,6 @@ while True: #all almost all of the code is on the loop so it can be returned to 
                         break
         
 
-    
-    
-    
-    
     
     
     elif menu == "Add":
