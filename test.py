@@ -77,28 +77,91 @@ add_cards = easygui.buttonbox("Wanna add new cards?", "Add new cards?", choices 
 if add_cards == "Yes":
     ID = easygui.enterbox("Please write ID of your card")
     while ID:
-            if len(ID) < 3:
+                if len(ID) < 3:
                  easygui.msgbox("Too short! ID must consist of three letters (it is recommended to use the first three letters of the monster's name).")
                  ID = easygui.enterbox("Please write ID of your card")
-            elif len(ID) > 3:
+                elif len(ID) > 3:
                  easygui.msgbox("Too long! ID must consist of three letters (it is recommended to use the first three letters of the monster's name).")
                  ID = easygui.enterbox("Please write ID of your card")    
-            elif ID in cards:
-                easygui.msgbox('This ID alredy in the cards! Try another one')
-                ID = easygui.enterbox("Please write ID of your card")
-            else:
-                cards[ID] = {}
-                break
+                elif ID in cards:
+                    easygui.msgbox('This ID alredy in the cards! Try another one')
+                    ID = easygui.enterbox("Please write ID of your card")
+                else:
+                    cards[ID] = {}
+                    break
+
+
 name = easygui.enterbox("Please write NAME of your card")            
 while name:
-            if name in cards:
-                 easygui.msgbox('This ID alredy in the cards! Try another one')
+            
+            if len(name) < 1:
+                 easygui.msgbox('Minimum characters in name is 1')
                  name = easygui.enterbox("Please write NAME of your card")
-            if len(name) > 25:
+            elif len(name) > 25:
                  easygui.msgbox('Maximum characters in name is 25')
                  name = easygui.enterbox("Please write NAME of your card")
-
+            elif name in cards:
+                 easygui.msgbox('This ID alredy in the cards! Try another one')
+                 name = easygui.enterbox("Please write NAME of your card")
             else:
                  cards[ID]['Name'] = name
             break
+
+strength = easygui.integerbox("Please write STRENGTH of your card")
+while strength:
+     if strength < 1:
+        easygui.msgbox('Minimum characters in strength is 1')
+        strength = easygui.integerbox("Please write STRENGTH of your card")
+     elif strength > 25:
+        easygui.msgbox('Maximum characters in strength is 25')
+        strength = easygui.integerbox("Please write STRENGTH of your card")
+     else:
+        cards[ID]["Strength"] = strength
+        break
+    
+speed = easygui.integerbox("Please write SPEED of your card")
+while speed:
+     if speed < 1:
+          easygui.msgbox('Minimum characters in speed is 1')
+          speed = easygui.integerbox("Please write SPEED of your card")
+     elif speed > 25:
+          easygui.msgbox('Maximum characters in speed is 25')
+          speed = easygui.integerbox("Please write SPEED of your card")
+     else:
+        cards[ID]["Speed"] = speed
+        break
+     
+
+stealth = easygui.integerbox("Please write STEALTH of your card")
+while stealth:
+     if stealth < 1:
+          easygui.msgbox('Minimum characters in stealth is 1')
+          speed = easygui.integerbox("Please write STEALTH of your card")
+     elif stealth > 25:
+          easygui.msgbox('Maximum characters in stealth is 25')
+          speed = easygui.integerbox("Please write STEALTH of your card")
+     else:
+        cards[ID]["stealth"] = stealth
+        break     
+
+cunning = easygui.integerbox("Please write STEALTH of your card")
+while cunning:
+     if cunning < 1:
+          easygui.msgbox('Minimum characters in cunnning is 1')
+          speed = easygui.integerbox("Please write CUNNING of your card")
+     elif cunning > 25:
+          easygui.msgbox('Maximum characters in cunning is 25')
+          speed = easygui.integerbox("Please write CUNNING of your card")
+     else: 
+        cards[ID]["cunning"] = cunning
+        break   
+
+
+message = "" 
+for cards_id, cards_info in cards.items(): #go through all cards id and cards info in the dictionary
+    message += f"Card ID: {cards_id}\n" #add the card id to the message
+    for key, value in cards_info.items(): #go through all cards details in the cards_info 
+        message += f" {key}: {value}\n" #add cards details (like speed, stealth)
+easygui.msgbox(message, "All cards")
+
 print(cards)
