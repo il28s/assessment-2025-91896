@@ -1,4 +1,4 @@
-import easygui
+import easygui #importing easyGUI
 
 #nested dictionary of all cards
 cards = {"STO":
@@ -56,34 +56,43 @@ cards = {"STO":
             "Stealth": 17, 
             "Cunning": 4},
         "WIS": 
-            {"Name": "Wispghoul", 
+            {"Name": "Wispghoul",
             "Strength": 17, 
             "Speed": 19, 
             "Stealth": 3, 
             "Cunning": 2}}
-while True:
-    test = easygui.buttonbox("Greetings! Press CARDS to see all cards", "Hello", choices = ["Cards", "Delete", "Add", "Change", "Exit"])
-
-    if test == "Exit":
+while True: #all almost all of the code is on the loop so it can be returned to the menu
+    menu = easygui.buttonbox("Select one of the options below.", "Options", choices = ["Cards", "Delete", "Add", "Change", "Search", "Exit"])
+    #main menu with all buttons "cards" - show all cards "delete" - delete the card "add" - add the card "change" - change the card "exit" - exit the programm
+    if menu == "Exit": #when user click "Exit" the loop is breaks
         break
 
-    if test == "Cards":
+    if menu == "Cards":
         message = ""
-        for cards_id, cards_info in cards.items(): 
-            message += f"Card ID: {cards_id}\n"
-            for key, value in cards_info.items(): 
-                message += f" {key}: {value}\n" 
-        easygui.msgbox(message, "All cards")
+        for cards_id, cards_info in cards.items(): #go through all cards id and cards info in the dictionary
+            message += f"Card ID: {cards_id}\n" #add the card id to the message
+            for key, value in cards_info.items(): #go through all cards details in the cards_info 
+                message += f" {key}: {value}\n" #add cards details (like speed, stealth)
+        easygui.msgbox(message, "All cards") #displaying whole dictionary
 
-    elif test == "Delete":
+    elif menu == "Delete":
         deleting = easygui.enterbox("Please write the ID of the card you want to delete.")
         del cards[deleting]
 
-    #elif add_cards == "Change":
-        
+    elif menu == "Change":
+        change = easygui.enterbox("Please write ID of card you want to change.")
+        while change:
+            change_what = easygui.enterbox("Please write what characteristics you want to change.")
+            change_to_what = easygui.integerbox("Enter new characteristics.")
+            if change_to_what < 1:
+                easygui.msgbox("Too short. Minimum data is - 1.")
+            elif change_to_what > 25:
+                easygui.msgbox("Too much. Maximum is 25.")
+            else:
+                cards[change][change_what] = change_to_what
         
 
-    elif test == "Add":
+    elif menu == "Add":
         ID = easygui.enterbox("Please write ID of your card")
         while ID:
                 if len(ID) < 3:
@@ -145,22 +154,22 @@ while True:
         while stealth:
             if stealth < 1:
                 easygui.msgbox('Minimum characters in stealth is 1')
-                speed = easygui.integerbox("Please write STEALTH of your card")
+                stealth = easygui.integerbox("Please write STEALTH of your card")
             elif stealth > 25:
                 easygui.msgbox('Maximum characters in stealth is 25')
-                speed = easygui.integerbox("Please write STEALTH of your card")
+                stealth = easygui.integerbox("Please write STEALTH of your card")
             else:
                 cards[ID]["stealth"] = stealth
                 break     
 
-        cunning = easygui.integerbox("Please write STEALTH of your card")
+        cunning = easygui.integerbox("Please write CUNNING of your card")
         while cunning:
             if cunning < 1:
                 easygui.msgbox('Minimum characters in cunnning is 1')
-                speed = easygui.integerbox("Please write CUNNING of your card")
+                cunning = easygui.integerbox("Please write CUNNING of your card")
             elif cunning > 25:
                 easygui.msgbox('Maximum characters in cunning is 25')
-                speed = easygui.integerbox("Please write CUNNING of your card")
+                cunning = easygui.integerbox("Please write CUNNING of your card")
             else:
                 cards[ID]["cunning"] = cunning
                 break   
