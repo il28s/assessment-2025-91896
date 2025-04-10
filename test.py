@@ -79,25 +79,52 @@ while True: #all almost all of the code is on the loop so it can be returned to 
         deleting = easygui.enterbox("Please write the ID of the card you want to delete.")
         del cards[deleting]
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
     elif menu == "Change":
-        change = easygui.enterbox("Please write ID of card you want to change.")
-        change_int_or_str = easygui.buttonbox("You want to change the name or characteristics?", "???", choices= ["ID", "Name", "Characteristics"])
-        if change_int_or_str == "Name":
-            while change_int_or_str:
-                new_name = easygui.enterbox("Enter new characteristics.")
-                cards[change]["Name"] = new_name
-                break
-        elif change_int_or_str == "Characteristics":
-            change_what = easygui.enterbox("Please write what characteristics you want to change.")
-            change_to_what = easygui.integerbox("Enter new characteristics.")
-            if change_to_what < 1:
-                easygui.msgbox("Too short. Minimum data is - 1.")
-            elif change_to_what > 25:
-                easygui.msgbox("Too much. Maximum is 25.")
+        while menu:
+            change_characteristic_id = easygui.enterbox("Please write ID of card you want to change.")
+            if change_characteristic_id not in cards:
+                easygui.msgbox("There's no such ID!")
             else:
-                cards[change][change_what] = change_to_what
+                break
+
+
+        change_int_or_str = easygui.buttonbox("You want to change the name or stats?", "???", choices= ["ID", "Name", "stats"])
+
+        if change_int_or_str == "Name":
+            new_name = easygui.enterbox("Enter new name.")
+            cards[change_characteristic_id]["Name"] = new_name
+        
+        elif change_int_or_str == "stats":
+            while True:
+                change_characteristic = easygui.enterbox("Please write what characteristics you want to change.")
+                if change_characteristic not in cards[change_characteristic_id]:
+                     easygui.msgbox("No such characteristic!")
+                elif change_characteristic in cards[change_characteristic_id]:
+                    new_characteristic = easygui.integerbox("Please enter new characteristic stat")
+                    if new_characteristic < 1:
+                        easygui.msgbox("Too short. Minimum data is - 1.")
+                    elif new_characteristic > 25:
+                        easygui.msgbox("Too much. Maximum is 25.")
+                    else:
+                        cards[change_characteristic_id][change_characteristic] = new_characteristic
+                        break
         
 
+    
+    
+    
+    
+    
+    
     elif menu == "Add":
         ID = easygui.enterbox("Please write ID of your card")
         while ID:
