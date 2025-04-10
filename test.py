@@ -81,11 +81,16 @@ while True: #all almost all of the code is on the loop so it can be returned to 
 
 
     elif menu == "Search":
-        message = ""
-        searching = easygui.enterbox("Enter name for searching.")
-        for key in cards.values():
-            message += f" {key}\n"
-            easygui.msgbox(message) 
+        display = ""
+        display = "\n".join([f"{key}: {value}" for key, value in cards.items()])
+        search = easygui.enterbox('Enter the name of the card for which you want to find information: ')
+        for key,value in cards.items():
+            display += "\n".join([f"{key}: {value}" for key, value in cards.items()])
+            for k,v in value.items():
+                if search==v:
+                    display = "\n".join([f"{key}: {value}" for key, value in value.items()])
+                    print(value.items())
+                    easygui.msgbox(display)
 
 
 

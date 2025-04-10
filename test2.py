@@ -57,14 +57,20 @@ cards = {"STO":
             "Cunning": 4},
         "WIS": 
             {"Name": "Wispghoul",
-            "Strength": 17, 
+            "Strength": 17,
             "Speed": 19, 
             "Stealth": 3, 
             "Cunning": 2}}
 
+display = ""
+display = "\n".join([f"{key}: {value}" for key, value in cards.items()])
+
 print('Actual-', cards)
 search = input('Enter: ')
 for key,value in cards.items():
+    display += "\n".join([f"{key}: {value}" for key, value in cards.items()])
     for k,v in value.items():
         if search==v:
+            display = "\n".join([f"{key}: {value}" for key, value in value.items()])
             print(value.items())
+            easygui.msgbox(display)
