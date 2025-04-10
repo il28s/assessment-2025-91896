@@ -164,4 +164,16 @@ for cards_id, cards_info in cards.items(): #go through all cards id and cards in
         message += f" {key}: {value}\n" #add cards details (like speed, stealth)
 easygui.msgbox(message, "All cards")
 
+delete = easygui.buttonbox("Wanna delete some cards?", "Deleting", choices = ["Yes", "No"])
+if delete == "Yes":
+     deleting = easygui.enterbox("Please write the ID of the card you want to delete.")
+     del cards[deleting]
+
+message = "" 
+for cards_id, cards_info in cards.items(): #go through all cards id and cards info in the dictionary
+    message += f"Card ID: {cards_id}\n" #add the card id to the message
+    for key, value in cards_info.items(): #go through all cards details in the cards_info 
+        message += f" {key}: {value}\n" #add cards details (like speed, stealth)
+easygui.msgbox(message, "All cards")
+
 print(cards)
