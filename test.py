@@ -81,7 +81,13 @@ while True: #all almost all of the code is on the loop so it can be returned to 
 
     elif menu == "Change":
         change = easygui.enterbox("Please write ID of card you want to change.")
-        while change:
+        change_int_or_str = easygui.buttonbox("You want to change the name or characteristics?", "???", choices= ["ID", "Name", "Characteristics"])
+        if change_int_or_str == "Name":
+            while change_int_or_str:
+                new_name = easygui.enterbox("Enter new characteristics.")
+                cards[change]["Name"] = new_name
+                break
+        elif change_int_or_str == "Characteristics":
             change_what = easygui.enterbox("Please write what characteristics you want to change.")
             change_to_what = easygui.integerbox("Enter new characteristics.")
             if change_to_what < 1:
