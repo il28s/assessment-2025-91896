@@ -80,7 +80,7 @@ while True: #all almost all of the code is on the loop so it can be returned to 
         del cards[deleting]
 
 
-    elif menu == "Search":
+    elif menu == "Search": #searching information about the card by name
         display = ""
         display = "\n".join([f"{key}: {value}" for key, value in cards.items()])
         search = easygui.enterbox('Enter the name of the card for which you want to find information: ')
@@ -91,14 +91,6 @@ while True: #all almost all of the code is on the loop so it can be returned to 
                     display = "\n".join([f"{key}: {value}" for key, value in value.items()])
                     print(value.items())
                     easygui.msgbox(display)
-
-
-
-
-
-
-
-
 
     elif menu == "Change":
         while menu:
@@ -130,9 +122,6 @@ while True: #all almost all of the code is on the loop so it can be returned to 
                         cards[change_characteristic_id][change_characteristic] = new_characteristic
                         break
         
-
-    
-    
     elif menu == "Add":
         ID = easygui.enterbox("Please write ID of your card")
         while ID:
