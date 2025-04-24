@@ -1,66 +1,69 @@
 import easygui #importing easyGUI
 
 #nested dictionary of all cards
-cards = {"STO": #id of the card (usually the first three letters of the name)
-            {"Name": "Stoneling", 
-            "Strength": 7, 
-            "Speed": 1, 
-            "Stealth": 25, 
-            "Cunning": 15},
-        "VEX":
-            {"Name": "Vexscream",
-            "Strength": 1,
-            "Speed": 6,
-            "Stealth": 21,
-            "Cunning": 19},
-        "DAW":
-            {"Name": "Dawnmirage",
-            "Strength": 5,
-            "Speed": 15,
-            "Stealth": 18,
-            "Cunning": 22},
-        "BLA":
-            {"Name": "Blazegolem",
-            "Strength": 15,
-            "Speed": 20,
-            "Stealth": 23,
-            "Cunning": 6},
-        "WEB":
-            {"Name": "Websnake",
-            "Strength": 7,
-            "Speed": 15,
-            "Stealth": 10,
-            "Cunning": 5},
-        "MOL":
-            {"Name": "Moldvine",
-            "Strength": 21,
-            "Speed": 18,
-            "Stealth": 14,
-            "Cunning": 5},
-        "VOR":
-            {"Name": "Vortexwing",
-            "Strength": 19,
-            "Speed": 13, 
-            "Stealth": 19, 
-            "Cunning": 2},
-        "ROT":
-            {"Name": "Rotthing", 
-            "Strength": 16, 
-            "Speed": 7, 
-            "Stealth": 4, 
-            "Cunning": 12},
-        "FRO": 
-            {"Name": "Froststep", 
-            "Strength": 14, 
-            "Speed": 14, 
-            "Stealth": 17, 
-            "Cunning": 4},
-        "WIS": 
-            {"Name": "Wispghoul",
-            "Strength": 17, 
-            "Speed": 19, 
-            "Stealth": 3, 
-            "Cunning": 2}}
+cards = {
+    "Stoneling": {
+        "Strength": 7, 
+        "Speed": 1, 
+        "Stealth": 25, 
+        "Cunning": 15
+    },
+    "Vexscream": {
+        "Strength": 1,
+        "Speed": 6,
+        "Stealth": 21,
+        "Cunning": 19
+    },
+    "Dawnmirage": {
+        "Strength": 5,
+        "Speed": 15,
+        "Stealth": 18,
+        "Cunning": 22
+    },
+    "Blazegolem": {
+        "Strength": 15,
+        "Speed": 20,
+        "Stealth": 23,
+        "Cunning": 6
+    },
+    "Websnake": {
+        "Strength": 7,
+        "Speed": 15,
+        "Stealth": 10,
+        "Cunning": 5
+    },
+    "Moldvine": {
+        "Strength": 21,
+        "Speed": 18,
+        "Stealth": 14,
+        "Cunning": 5
+    },
+    "Vortexwing": {
+        "Strength": 19,
+        "Speed": 13, 
+        "Stealth": 19, 
+        "Cunning": 2
+    },
+    "Rotthing": {
+        "Strength": 16, 
+        "Speed": 7, 
+        "Stealth": 4, 
+        "Cunning": 12
+    },
+    "Froststep": {
+        "Strength": 14, 
+        "Speed": 14, 
+        "Stealth": 17, 
+        "Cunning": 4
+    },
+    "Wispghoul": {
+        "Strength": 17, 
+        "Speed": 19, 
+        "Stealth": 3, 
+        "Cunning": 2
+    }
+}
+
 while True: #all almost all of the code is on the loop so it can be returned to the menu
     menu = easygui.buttonbox("Select one of the options below.", "Options", choices = ["Cards", "Delete", "Add", "Change", "Search", "Exit"])
     #main menu with all buttons "cards" - show all cards "delete" - delete the card "add" - add the card "change" - change the card "exit" - exit the programm
@@ -77,7 +80,10 @@ while True: #all almost all of the code is on the loop so it can be returned to 
 
     elif menu == "Delete": #deleting the card (basically deliting a dictionary in the nested dictionary (cards))
         deleting = easygui.enterbox("Please write the ID of the card you want to delete.") #which dictionary in nested dictionary user want to delete
-        del cards[deleting] #deleting entered dictionary, yes
+        if deleting not in cards:
+            easygui.msgbox("You cant delete something that doesnt exist!")
+        else:
+            del cards[deleting] #deleting entered dictionary, yesbreak
 
 
     elif menu == "Search": #searching information about the card by name
