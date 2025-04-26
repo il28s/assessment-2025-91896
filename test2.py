@@ -57,7 +57,7 @@ cards = {
         "Cunning": 4
     },
     "Wispghoul": {
-        "Strength": 17, 
+        "Strength": 17,
         "Speed": 19, 
         "Stealth": 3, 
         "Cunning": 2
@@ -122,26 +122,37 @@ def change():
                 break
 
 
-        change_int_or_str = easygui.buttonbox("You want to change the name or stats?", "???", choices= ["Name", "Stats"])
-             #asks user what exactly he wants to change. I made it this way because it was easier for me to work separately either with .enterbox or .integerbox
-        if change_int_or_str == "Name":
-            new_name = easygui.enterbox("Enter new name.")
-            cards[new_name] = cards.pop(change_characteristic_id)
-            menu()
-        elif change_int_or_str == "stats": #if user decided to change stats of the card
+        change_int_or_str = easygui.buttonbox("You want to change the name or stats?", "???", choices= ["name", "stats"])
+        if change_int_or_str == "name":
+            while change_int_or_str:
+                 new_name = easygui.enterbox("Enter new name.")
+                 if not new_name:
+                      easygui.msgbox("Cancelled.")
+                      menu()
+                 if new_name.isalpha():
+                      cards[new_name] = cards.pop(change_characteristic_id)
+                      break
+                 else:
+                      easygui.msgbox("Only letters!")
+        
+        if change_int_or_str == "stats":
             while True:
-                change_characteristic = easygui.enterbox("Please write what characteristics you want to change.") #asks what kind of stat user wants to change, for example speed, stealth
+                change_characteristic = easygui.enterbox("Please write what characteristics you want to change.") 
                 if change_characteristic not in cards[change_characteristic_id]:
-                     easygui.msgbox("No such characteristic!") #if user entered something that doesnt exist in the dictionary, for example "Power" or "Intellect"
+                     easygui.msgbox("Canceled.")
+                     menu()
                 elif change_characteristic in cards[change_characteristic_id]:
-                    new_characteristic = easygui.integerbox("Please enter new characteristic stat") #asking new value of devided characteristics. For example if speed was 1 and user wants make it 25
-                    if new_characteristic < 1: #if entered stat doesnt required to minimum amount
+                    new_characteristic = easygui.integerbox("Please enter new characteristic stat")
+                    if not new_characteristic:
+                         easygui.msgbox("Cancelled.")
+                         menu()
+                    elif new_characteristic < 1: 
                         easygui.msgbox("Too short. Minimum data is - 1.")
                     elif new_characteristic > 25:
                         easygui.msgbox("Too much. Maximum is 25.")
                     else:
-                        cards[change_characteristic_id][change_characteristic] = new_characteristic #changes value of key to users value
-                        break
+                        cards[change_characteristic_id][change_characteristic] = new_characteristic 
+                        menu()
 
 
 
