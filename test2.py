@@ -1,4 +1,5 @@
 import easygui #importing easyGUI
+import sys
 
 #nested dictionary of all cards
 cards = {
@@ -79,6 +80,8 @@ def menu():
           search()
      elif vibor == "Change":
           change()
+     elif vibor == "Add":
+          add()
 
 def allcards():
     message = ""
@@ -116,7 +119,10 @@ def delete():
 def change():
         while menu:
             change_characteristic_id = easygui.enterbox("Please write name of card you want to change.")
-            if change_characteristic_id not in cards:
+            if not change_characteristic_id:
+                 easygui.msgbox("Cancelled.")
+                 menu()
+            elif change_characteristic_id not in cards:
                 easygui.msgbox("There's no such ID!")
             else:
                 break
@@ -160,11 +166,11 @@ def change():
 
 
 def exit():
-     exit
+     sys.exit()
 
 
 starting = easygui.buttonbox("Welcome!", "welcome", choices = ["Start"])
-if starting != "Start":
-     exit
+if not starting:
+     exit()
 else:
      menu()
