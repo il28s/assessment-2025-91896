@@ -119,14 +119,14 @@ def change():
             if change_characteristic_id not in cards:
                 easygui.msgbox("There's no such ID!")
             else:
-                break #breaks if user entered ID that doesnt exist in the dictionary
+                break
 
 
         change_int_or_str = easygui.buttonbox("You want to change the name or stats?", "???", choices= ["Name", "Stats"])
              #asks user what exactly he wants to change. I made it this way because it was easier for me to work separately either with .enterbox or .integerbox
         if change_int_or_str == "Name":
             new_name = easygui.enterbox("Enter new name.")
-            cards[change_characteristic_id]= new_name #changes value of name to users input
+            cards[new_name] = cards.pop(change_characteristic_id)
             menu()
         elif change_int_or_str == "stats": #if user decided to change stats of the card
             while True:
