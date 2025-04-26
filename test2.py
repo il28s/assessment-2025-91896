@@ -78,8 +78,40 @@ def menu():
      elif vibor == "Search":
           search()
 
+def allcards():
+    message = ""
+    for cards_id, cards_info in cards.items():
+        message += f"Card ID: {cards_id}\n" 
+        for key, value in cards_info.items():
+            message += f" {key}: {value}\n" 
+    easygui.msgbox(message, "All cards")
+    menu()
 
+def search():
+    search = easygui.enterbox('Enter the name of the card for which you want to find information: ')
+    if search in cards:
+        card = cards[search]
+        display = f"Card Name: {search}\n"
+        for stat, value in card.items():
+            display += f"{stat}: {value}\n"
+        easygui.msgbox(display)
+    else:
+        easygui.msgbox(f"No card found with the name: {search}")
 
+def delete():
+        deleting = easygui.enterbox("Please write the ID of the card you want to delete.")
+        if deleting not in cards:
+            easygui.msgbox("You cant delete something that doesnt exist!")
+        else:
+            del cards[deleting]
+            after_del = easygui.buttonbox(deleting + "" + "is deleted.", choices = ["Menu", "Cards"])
+            if after_del == "Menu":
+                 menu()
+            elif after_del == "Cards":
+                 allcards()
+
+def exit():
+     exit
 
 
 starting = easygui.buttonbox("Welcome!", "welcome", choices = ["Start"])
