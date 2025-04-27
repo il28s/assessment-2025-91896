@@ -93,27 +93,41 @@ def allcards():
     menu()
 
 def search():
-    search = easygui.enterbox('Enter the name of the card for which you want to find information: ')
-    if search in cards:
-        card = cards[search]
-        display = f"Card Name: {search}\n"
-        for stat, value in card.items():
-            display += f"{stat}: {value}\n"
-        easygui.msgbox(display)
-    else:
-        easygui.msgbox(f"No card found with the name: {search}")
+    search2 = easygui.enterbox('Enter the name of the card for which you want to find information: ')
+    if not search2:
+         menu()
+    while search2:
+        if search2 in cards:
+            card = cards[search2]
+            display = f"Card Name: {search2}\n"
+            for stat, value in card.items():
+                display += f"{stat}: {value}\n"
+            easygui.msgbox(display)
+            menu()
+            break
+        else:
+            easygui.msgbox(f"No card found with the name: {search2}")
+            search()
+            break
 
 def delete():
         deleting = easygui.enterbox("Please write the ID of the card you want to delete.")
-        if deleting not in cards:
-            easygui.msgbox("You cant delete something that doesnt exist!")
-        else:
-            del cards[deleting]
-            after_del = easygui.buttonbox(deleting + "" + "is deleted.", choices = ["Menu", "Cards"])
-            if after_del == "Menu":
-                 menu()
-            elif after_del == "Cards":
-                 allcards()
+        if not deleting:
+             menu()
+        while True:
+            if deleting not in cards:
+                easygui.msgbox("You cant delete something that doesnt exist!")
+                delete()
+                break
+            else:
+                del cards[deleting]
+                after_del = easygui.buttonbox(deleting + "" + "is deleted.", choices = ["Menu", "Cards"])
+                if after_del == "Menu":
+                    menu()
+                elif after_del == "Cards":
+                    allcards()
+                break
+            menu()
 
 
 def change():
@@ -162,8 +176,26 @@ def change():
 
 
 
-
-
+def add():
+    while True:
+        namecard = easygui.enterbox("Please write the NAME of your card")
+        if namecard is None:
+            easygui.msgbox("Cancelled.")
+            break
+        elif not namecard.isalpha():
+            easygui.msgbox("Only LETTERS!")
+            namecard = easygui.enterbox("Please write the NAME of your card")
+        elif len(namecard) < 1:
+            easygui.msgbox('Minimum characters in name is 1')
+        elif len(namecard) > 25:
+            easygui.msgbox('Maximum characters in name is 25')
+        elif namecard in cards:
+            easygui.msgbox('This ID alredy in the cards! Try another one')
+            namecard = easygui.enterbox("Please write NAME of your card")
+        else:
+            cards[namecard] = {}
+            break    
+    
 
 def exit():
      sys.exit()

@@ -206,3 +206,60 @@ while True: #all almost all of the code is on the loop so it can be returned to 
 
 
 print(cards)
+
+
+
+
+
+
+
+strength = easygui.integerbox("Please write STRENGTH of your card")
+    while strength:
+        if strength < 1:
+            easygui.msgbox('Minimum characters in strength is 1')
+            strength = easygui.integerbox("Please write STRENGTH of your card")
+        elif strength > 25:
+            easygui.msgbox('Maximum characters in strength is 25')
+            strength = easygui.integerbox("Please write STRENGTH of your card")
+        else:
+            cards[namecard]["Strength"] = strength 
+            break
+        
+    speed = easygui.integerbox("Please write SPEED of your card")
+    while speed:
+        if speed < 1:
+            easygui.msgbox('Minimum characters in speed is 1')
+            speed = easygui.integerbox("Please write SPEED of your card")
+        elif speed > 25:
+            easygui.msgbox('Maximum characters in speed is 25')
+            speed = easygui.integerbox("Please write SPEED of your card")
+        else:
+            cards[namecard]["Speed"] = speed
+            break
+        
+
+    stealth = easygui.integerbox("Please write STEALTH of your card")
+    while stealth:
+        if stealth < 1:
+            easygui.msgbox('Minimum characters in stealth is 1')
+            stealth = easygui.integerbox("Please write STEALTH of your card")
+        elif stealth > 25:
+            easygui.msgbox('Maximum characters in stealth is 25')
+            stealth = easygui.integerbox("Please write STEALTH of your card")
+        else:
+            cards[namecard]["stealth"] = stealth
+            break     
+
+    cunning = easygui.integerbox("Please write CUNNING of your card")
+    while cunning:
+        if cunning < 1:
+            easygui.msgbox('Minimum characters in cunnning is 1')
+            cunning = easygui.integerbox("Please write CUNNING of your card")
+        elif cunning > 25:
+            easygui.msgbox('Maximum characters in cunning is 25')
+            cunning = easygui.integerbox("Please write CUNNING of your card")
+        else:
+            cards[namecard]["cunning"] = cunning
+            easygui.msgbox("New card added.")
+            menu()
+            break
