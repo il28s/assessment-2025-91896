@@ -181,21 +181,27 @@ def add():
         namecard = easygui.enterbox("Please write the NAME of your card")
         if namecard is None:
             easygui.msgbox("Cancelled.")
+            menu()
             break
+        elif not namecard:
+             easygui.msgbox("Enter the name.")
+             continue
         elif not namecard.isalpha():
             easygui.msgbox("Only LETTERS!")
-            namecard = easygui.enterbox("Please write the NAME of your card")
-        elif len(namecard) < 1:
-            easygui.msgbox('Minimum characters in name is 1')
+            continue
         elif len(namecard) > 25:
             easygui.msgbox('Maximum characters in name is 25')
+            continue
         elif namecard in cards:
             easygui.msgbox('This ID alredy in the cards! Try another one')
-            namecard = easygui.enterbox("Please write NAME of your card")
-        else:
-            cards[namecard] = {}
-            break    
-    
+            continue
+        cards[namecard] = {}
+        break
+             
+        
+        
+        
+
 
 def exit():
      sys.exit()
