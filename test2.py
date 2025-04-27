@@ -214,6 +214,7 @@ def add():
         namecard = easygui.enterbox("Please write the NAME of your card")
         if namecard is None:
             easygui.msgbox("Cancelled.")
+            del cards[namecard]
             menu()
             break
         elif not namecard:
@@ -236,6 +237,7 @@ def add():
         strength = easygui.integerbox("Please write STRENGTH of your card")
         if strength is None:
             easygui.msgbox("Cancelled.")
+            del cards[namecard]
             menu()
             break
         elif not strength:
@@ -255,6 +257,7 @@ def add():
         speed = easygui.integerbox("Please write SPEED of your card")
         if speed is None:
             easygui.msgbox("Cancelled.")
+            del cards[namecard]
             menu()
             break
         elif not speed:
@@ -274,6 +277,7 @@ def add():
         stealth = easygui.integerbox("Please write STEALTH of your card")
         if stealth is None:
             easygui.msgbox("Cancelled.")
+            del cards[namecard]
             menu()
             break
         elif not stealth:
@@ -293,6 +297,7 @@ def add():
         cunning = easygui.integerbox("Please write CUNNING of your card")
         if cunning is None:
             easygui.msgbox("Cancelled.")
+            del cards[namecard]
             menu()
             break
         elif not cunning:
