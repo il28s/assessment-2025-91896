@@ -66,48 +66,46 @@ cards = {
 }
 
 
-def menu():
-     vibor = easygui.buttonbox("Select one of the options below.", "Options", choices = ["Cards", "Delete", "Add", "Change", "Search", "Exit", "Menu"])
+def menu(): #this function launches easygui buttonbox which is basically a main menu/navigation page of the program
+     vibor = easygui.buttonbox("Select one of the options below.", "Options", choices = ["Cards", "Delete", "Add", "Change", "Search", "Exit", "Menu"]) #displays a Easy Gui User interface with 6 buttons. Each button calls specific function
      if vibor == "Menu":
-          menu()
+          menu() #this button calls menu function
      elif vibor == "Cards":
-          allcards()
+          allcards() #calls allcards function and shows all the cards 
      elif vibor == "Delete":
-          delete()
+          delete() #calls delete function, needs to delete the whole card
      elif vibor == "Exit":
-          exit()
+          exit() #calls an exit button
      elif vibor == "Search":
-          search()
+          search() #calls searching function
      elif vibor == "Change":
-          change()
+          change() #calls a change function
      elif vibor == "Add":
-          add()
+          add() #calls add function
 
-def allcards():
-    message = ""
-    for cards_id, cards_info in cards.items():
-        message += f"Name: {cards_id}\n" 
-        for key, value in cards_info.items():
-            message += f" {key}: {value}\n" 
-    easygui.msgbox(message, "All cards")
-    menu()
+def allcards(): #function that shows information of all cards in dictionary
+    message = "" #empty text where will be add all the infomation about  cards
+    for cards_id, cards_info in cards.items(): #go through all cards name and info in the dictionary
+        message += f"Name: {cards_id}\n" #adds cards name into the message 
+        for key, value in cards_info.items(): #goes through key and value for each card 
+            message += f" {key}: {value}\n" #adds key and value for each card into the message
+    easygui.msgbox(message, "All cards") #shows all collected information about all cards in easygui messagebox
+    menu() #calls the menu functiom when user presses the "OK" button in previous messagebox
 
-def search():
-    while True:
-        search2 = easygui.enterbox('Enter the name of the card for which you want to find information: ')
-        if search2 is None:
-                easygui.msgbox("Cancelled.")
-                menu()
-                break
-        elif not search2:
-            easygui.msgbox("Enter the name.")
-            continue
-        elif search2 not in cards:
-            easygui.msgbox(f"No card found with the name: {search2}")
-            continue
-        else:
-            while search2:
-                if search2 in cards:
+def search(): #function that search information of a specific card that user wants to find 
+    while True: #while loop so it keeps asking until the user finds a card or cancels 
+        search2 = easygui.enterbox('Enter the name of the card for which you want to find information: ') #asks the user ti type the card name
+        if search2 is None: #if the user presser cancel
+                easygui.msgbox("Cancelled.") #shows the messagebox "cancelled."
+                menu() #calls the menu function
+                break #stops the loop
+        elif not search2: #if the user didnt type anything
+            easygui.msgbox("Enter the name.") #tells the user enter the name
+            continue #restarts the loop
+        elif search2 not in cards: #if the name user entered is not exist in the dictionary
+            easygui.msgbox(f"No card found with the name: {search2}") #tells the user card is not found
+            continue #restarts the loop
+        else: #if the card exist
                     card = cards[search2]
                     display = f"Card Name: {search2}\n"
                     for stat, value in card.items():
