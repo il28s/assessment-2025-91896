@@ -102,11 +102,11 @@ def search(): #function that search information of a specific card that user wan
         elif not search2: #if the user didnt type anything
             easygui.msgbox("Enter the name.") #tells the user enter the name
             continue #restarts the loop
-        elif search2 not in cards: #if the name user entered is not exist in the dictionary
-            easygui.msgbox(f"No card found with the name: {search2}") #tells the user card is not found
+        elif search2.title() not in cards: #if the name user entered is not exist in the dictionary
+            easygui.msgbox(f"No card found with the name: {search2.title()}") #tells the user card is not found
             continue #restarts the loop
         else: #if the card exist
-                    card = cards[search2]
+                    card = cards[search2.title()]
                     display = f"Card Name: {search2}\n"
                     for stat, value in card.items():
                         display += f"{stat}: {value}\n"
@@ -128,11 +128,11 @@ def delete():
                 easygui.msgbox("Enter the name.")
                 continue
             
-            elif deleting not in cards:
+            elif deleting.title() not in cards:
                 easygui.msgbox("You cant delete something that doesnt exist!")
                 continue
             else:
-                del cards[deleting]
+                del cards[deleting.title()]
             after_del = easygui.buttonbox(deleting + "" + "is deleted.", choices = ["Menu", "Cards"])
             if after_del == "Menu":
                 menu()
@@ -152,7 +152,7 @@ def change():
             elif not change_characteristic_id:
                  easygui.msgbox("Enter the name.")
                  continue
-            elif change_characteristic_id not in cards:
+            elif change_characteristic_id.title() not in cards:
                 easygui.msgbox("There's no such ID!")
                 continue
             else:
@@ -171,7 +171,7 @@ def change():
                             easygui.msgbox("Only letters!")
                             continue
                         else:
-                            cards[new_name] = cards.pop(change_characteristic_id)
+                            cards[new_name.title()] = cards.pop(change_characteristic_id.title())
                             easygui.msgbox("The card has been changed.")
                             menu()
                             break
@@ -187,11 +187,11 @@ def change():
                             easygui.msgbox("Enter the characteristic.")
                             continue
                         
-                        elif change_characteristic not in cards[change_characteristic_id]:
+                        elif change_characteristic.title() not in cards[change_characteristic_id.title()]:
                                     easygui.msgbox("No such characteristic!")
                                     continue
                         
-                        elif change_characteristic in cards[change_characteristic_id]:
+                        elif change_characteristic.title() in cards[change_characteristic_id.title()]:
                             while True:
                                 new_characteristic = easygui.integerbox("Please enter new characteristic stat")
                                 if new_characteristic < 1:
@@ -201,7 +201,7 @@ def change():
                                     easygui.msgbox("Too much. Maximum is 25.")
                                     continue
                                 else:
-                                    cards[change_characteristic_id][change_characteristic] = new_characteristic
+                                    cards[change_characteristic_id.title()][change_characteristic.title()] = new_characteristic
                                     easygui.msgbox("The card has been changed.")
                                     menu()
                                     break
@@ -228,14 +228,14 @@ def add():
             easygui.msgbox('This ID alredy in the cards! Try another one')
             continue
         else:
-            cards[namecard] = {}
+            cards[namecard.title()] = {}
             break
              
     while True:
         strength = easygui.integerbox("Please write STRENGTH of your card")
         if strength is None:
             easygui.msgbox("Cancelled.")
-            del cards[namecard]
+            del cards[namecard.title()]
             menu()
             break
         elif not strength:
@@ -248,14 +248,14 @@ def add():
             easygui.msgbox('Maximum characters in strength is 25')
             continue
         else:
-            cards[namecard]["Strength"] = strength
+            cards[namecard.title()]["Strength"] = strength
             break
 
     while True:
         speed = easygui.integerbox("Please write SPEED of your card")
         if speed is None:
             easygui.msgbox("Cancelled.")
-            del cards[namecard]
+            del cards[namecard.title()]
             menu()
             break
         elif not speed:
@@ -268,14 +268,14 @@ def add():
             easygui.msgbox('Maximum characters in speed is 25')
             continue
         else:
-            cards[namecard]["Speed"] = speed
+            cards[namecard.title()]["Speed"] = speed
             break
         
     while True:
         stealth = easygui.integerbox("Please write STEALTH of your card")
         if stealth is None:
             easygui.msgbox("Cancelled.")
-            del cards[namecard]
+            del cards[namecard.title()]
             menu()
             break
         elif not stealth:
@@ -288,14 +288,14 @@ def add():
             easygui.msgbox('Maximum characters in stealth is 25')
             continue
         else:
-            cards[namecard]["stealth"] = stealth
+            cards[namecard.title()]["stealth"] = stealth
             break
     
     while True:
         cunning = easygui.integerbox("Please write CUNNING of your card")
         if cunning is None:
             easygui.msgbox("Cancelled.")
-            del cards[namecard]
+            del cards[namecard.title()]
             menu()
             break
         elif not cunning:
@@ -308,7 +308,7 @@ def add():
             easygui.msgbox('Maximum characters in cunning is 25')
             continue
         else:
-            cards[namecard]["cunning"] = cunning
+            cards[namecard.title()]["cunning"] = cunning
             easygui.msgbox("Card successfully added!")
             menu()
             break      
