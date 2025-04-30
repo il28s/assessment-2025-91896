@@ -106,102 +106,102 @@ def search(): #function that search information of a specific card that user wan
             easygui.msgbox(f"No card found with the name: {search2.title()}") #tells the user card is not found
             continue #restarts the loop
         else: #if the card exist
-                    card = cards[search2.title()]
-                    display = f"Card Name: {search2}\n"
-                    for stat, value in card.items():
-                        display += f"{stat}: {value}\n"
-                    easygui.msgbox(display)
-                    menu()
-                    break
+                    card = cards[search2.title()] #all information of the cards
+                    display = f"Card Name: {search2}\n" #the name of the card user entered
+                    for stat, value in card.items(): #goes through all the stats in specific card
+                        display += f"{stat}: {value}\n" #put all collected information about entered card to the display message
+                    easygui.msgbox(display) #siaplays all information about the card
+                    menu() #calls menu function
+                    break #breaks the loop
                 
             
                     
 
-def delete():
+def delete(): #calls delete function
         while True:
-            deleting = easygui.enterbox("Please write the name of the card you want to delete.")
-            if deleting is None:
-                easygui.msgbox("Cancelled.")
+            deleting = easygui.enterbox("Please write the name of the card you want to delete.") #asks for a name of the card user wants to delete
+            if deleting is None: 
+                easygui.msgbox("Cancelled.") #if user presses the "cancel" button the loops breaks and it goes to the main menu
                 menu()
                 break
-            elif not deleting:
-                easygui.msgbox("Enter the name.")
+            elif not deleting: 
+                easygui.msgbox("Enter the name.") #is user didnt entered anything or just pressed enter then loop is restarts
                 continue
             
-            elif deleting.title() not in cards:
-                easygui.msgbox("You cant delete something that doesnt exist!")
+            elif deleting.title() not in cards: 
+                easygui.msgbox("You cant delete something that doesnt exist!") #if the name is not in the dictionary
                 continue
             else:
-                del cards[deleting.title()]
-            after_del = easygui.buttonbox(deleting + "" + "is deleted.", choices = ["Menu", "Cards"])
+                del cards[deleting.title()] #if the name in the dictionary program deletes the card by using "del"
+            after_del = easygui.buttonbox(deleting + "" + "is deleted.", choices = ["Menu", "Cards"]) #tells user that card is deleted
             if after_del == "Menu":
-                menu()
+                menu() #if user presses menu button it goes to the menu
             elif after_del == "Cards":
-                allcards()
+                allcards() #is user presses cards button it goes to the allcards (calling allcards function)
                 break
             
 
 
 def change():
         while True:
-            change_characteristic_id = easygui.enterbox("Please write name of card you want to change.")
+            change_characteristic_id = easygui.enterbox("Please write name of card you want to change.") #asks for the name of card he wants to change
             if change_characteristic_id is None:
-                easygui.msgbox("Cancelled.")
+                easygui.msgbox("Cancelled.") #if user presses the "cancel" button the loops breaks and it goes to the main menu
                 menu()
                 break
             elif not change_characteristic_id:
-                 easygui.msgbox("Enter the name.")
+                 easygui.msgbox("Enter the name.") #if user didnt entered anything or just pressed enter then loop is restarts
                  continue
             elif change_characteristic_id.title() not in cards:
-                easygui.msgbox("There's no such ID!")
+                easygui.msgbox("There's no such ID!")  #if the name is not in the dictionary
                 continue
             else:
-                change_int_or_str = easygui.buttonbox("You want to change the name or stats?", "???", choices= ["name", "stats"])
+                change_int_or_str = easygui.buttonbox("You want to change the name or stats?", "???", choices= ["name", "stats"]) #program finds the name but asks what exactly he wants to change
                 if change_int_or_str == "name":
                     while True:
-                        new_name = easygui.enterbox("Enter new name.")
+                        new_name = easygui.enterbox("Enter new name.") #if user decided to change a name the programm asks for the name of the card user wants to change
                         if new_name is None:
-                            easygui.msgbox("Cancelled.")
+                            easygui.msgbox("Cancelled.") #if user presses the "cancel" button the loops breaks and it goes to the main menu
                             menu()
                             break
                         elif not new_name:
-                            easygui.msgbox("Enter the name.")
+                            easygui.msgbox("Enter the name.")  #if user didnt entered anything or just pressed enter then loop is restarts
                             continue
                         elif not new_name.isalpha():
-                            easygui.msgbox("Only letters!")
+                            easygui.msgbox("Only letters!") #isalpha() checks if there is any symbols besides the letters
                             continue
                         else:
-                            cards[new_name.title()] = cards.pop(change_characteristic_id.title())
+                            cards[new_name.title()] = cards.pop(change_characteristic_id.title()) #change the old name of the old card to the new name
                             easygui.msgbox("The card has been changed.")
                             menu()
                             break
         
                 if change_int_or_str == "stats":
                     while True:
-                        change_characteristic = easygui.enterbox("Please write what characteristics you want to change.")
+                        change_characteristic = easygui.enterbox("Please write what characteristics you want to change.") #if user decided to change the stats pf the card then program asks what characteristics user wants to change
                         if change_characteristic is None:
-                            easygui.msgbox("Cancelled.")
+                            easygui.msgbox("Cancelled.") #if user presses the "cancel" button the loops breaks and it goes to the main menu
                             menu()
                             break
                         elif not change_characteristic:
-                            easygui.msgbox("Enter the characteristic.")
+                            easygui.msgbox("Enter the characteristic.") #if user didnt entered anything or just pressed enter then loop is restarts
                             continue
                         
-                        elif change_characteristic.title() not in cards[change_characteristic_id.title()]:
-                                    easygui.msgbox("No such characteristic!")
+                        elif change_characteristic.title() not in cards[change_characteristic_id.title()]: 
+                                    easygui.msgbox("No such characteristic!") #if there is no such characteristic in the dictionary
                                     continue
                         
-                        elif change_characteristic.title() in cards[change_characteristic_id.title()]:
+                        elif change_characteristic.title() in cards[change_characteristic_id.title()]: 
                             while True:
-                                new_characteristic = easygui.integerbox("Please enter new characteristic stat")
+                                new_characteristic = easygui.integerbox("Please enter new characteristic stat") #if the programm finds the characteridtic it asks for the new value
                                 if new_characteristic < 1:
-                                    easygui.msgbox("Too short. Minimum data is - 1.")
+                                    easygui.msgbox("Too short. Minimum data is - 1.") #if user entered something under 1
                                     continue
                                 elif new_characteristic > 25:
-                                    easygui.msgbox("Too much. Maximum is 25.")
+                                    easygui.msgbox("Too much. Maximum is 25.") #if user entered something more than 25
                                     continue
                                 else:
-                                    cards[change_characteristic_id.title()][change_characteristic.title()] = new_characteristic
+                                    cards[change_characteristic_id.title()][change_characteristic.title()] = new_characteristic #change the old characteristic to the new one
                                     easygui.msgbox("The card has been changed.")
                                     menu()
                                     break
